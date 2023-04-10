@@ -43,6 +43,12 @@ public class target : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+        //the ide realld didn't like gameManager.GameOver(); so I did a workaround
+
+        if (!gameObject.CompareTag("bad"))
+        {
+            gameManager.gameOverText.gameObject.SetActive(true);
+        }
     }
 
     Vector3 randomForce()
