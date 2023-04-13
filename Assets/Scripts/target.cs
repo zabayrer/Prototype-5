@@ -35,19 +35,27 @@ public class target : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Destroy(gameObject);
-        gameManager.UpdateScore(pointValue);
-        Instantiate(exposionParticle, transform.position, exposionParticle.transform.rotation);
+    
+        if (gameManager.isGameActive)
+        {
+            Destroy(gameObject);
+            gameManager.UpdateScore(pointValue);
+            Instantiate(exposionParticle, transform.position, exposionParticle.transform.rotation);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
-        //the ide realld didn't like gameManager.GameOver(); so I did a workaround
+        //the ide really didn't like gameManager.GameOver(); so I did a workaround
 
         if (!gameObject.CompareTag("bad"))
         {
             gameManager.gameOverText.gameObject.SetActive(true);
+            //i'm still doing a workaround
+            gameManager.isGameActive = false;
+            //still workaround
+            gameManager.restartButton.gameObject.SetActive(true);
         }
     }
 
